@@ -27,14 +27,19 @@ class Article extends Component {
           <p>loading article...</p>
         ) : (
           <>
-            <h2> {title}</h2>
+            <h2>
+              {' '}
+              {title} <button onClick={this.upvoteArticle}>⬆️</button>{' '}
+              <button onClick={this.downvoteArticle}>⬇️</button>
+            </h2>
             <p>{topic}</p>
             <p>
               posted by {author} at {created_at}
             </p>
             <p>{body}</p>
-            <p>votes: {votes}</p>
-            <p>comments: {comment_count}</p>
+            <p>
+              votes: {votes} comments: {comment_count}
+            </p>
           </>
         )}
         <br></br>
@@ -42,10 +47,10 @@ class Article extends Component {
           <p>loading comments...</p>
         ) : (
           <>
-          <Toggle buttonMessage='Add a comment'>
-            <AddComment articleId={this.props.article_id}/>
-          </Toggle>
-          <Comments comments={this.state.comments} />
+            <Toggle buttonMessage='Add a comment'>
+              <AddComment articleId={this.props.article_id} />
+            </Toggle>
+            <Comments comments={this.state.comments} />
           </>
         )}
       </div>
@@ -62,6 +67,26 @@ class Article extends Component {
       this.setState({ comments, commentsIsLoading: false });
     });
   }
+
+  //add functionality so you can only vote once??
+  
+  upvoteArticle = () => {
+    console.log('upvoted!');
+    api.patchCommentVotes(this.props.article_id, 1).then(votes => {
+      console.log(votes);
+      this.setState(currentState => {
+        return { article: {...currentState.article, votes}};
+      });
+    });
+  };
+
+  downvoteArticle = () => {
+    api.patchCommentVotes(this.props.article_id, -1).then(votes => {
+      this.setState(currentState => {
+        return { article: {...currentState.article, votes}};
+      });
+    });
+  };
 }
 
 export default Article;
