@@ -4,7 +4,8 @@ import { Router } from '@reach/router';
 import Home from './components/Home';
 import Header from './components/Header';
 import Nav from './components/Nav';
-import Topics from './components/Topics'
+import Topics from './components/Topics';
+import Article from './components/Article'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Router>
         <Home path='/' />
         <Topics path='/topics/:topic' />
+        <Article path='/articles/:article_id'/>
       </Router>
     </div>
   );
