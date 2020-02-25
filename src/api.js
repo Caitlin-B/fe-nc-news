@@ -2,9 +2,9 @@ import axios from 'axios';
 
 const baseURL = 'https://cb-news.herokuapp.com/api';
 
-export const fetchArticles = ({ author, topic, sort_by } = {}) => {
+export const fetchArticles = ({ author, topic, sort_by, order } = {}) => {
   return axios
-    .get(baseURL + '/articles', { params: { topic } })
+    .get(baseURL + '/articles', { params: { author, topic, sort_by, order } })
     .then(result => {
       return result.data.articles;
     });
@@ -28,7 +28,18 @@ export const fetchComments = article_id => {
     .then(result => result.data.comments);
 };
 
-//it is always increasing by 1???
 export const patchCommentVotes = (article_id, incrementBy) => {
-  return axios.patch(baseURL + `/articles/${article_id}`, { inc_votes: incrementBy }).then(res => res.data.article.votes)
+  return axios
+    .patch(baseURL + `/articles/${article_id}`, { inc_votes: incrementBy })
+    .then(res => res.data.article.votes);
+};
+
+export const postLogIn = (username, password) => {
+  return axios.post(baseURL + '/login', { username, password }).then(res => {
+    localStorage.setItem('token', res.data.token);
+  });
+};
+
+export const postUser = newUser => {
+  return axios.post(baseURL + '/users', newUser);
 };

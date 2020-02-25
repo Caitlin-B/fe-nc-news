@@ -1,24 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import { Router } from '@reach/router';
 import Home from './components/Home';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Topics from './components/Topics';
-import Article from './components/Article'
+import Article from './components/Article';
+import LogIn from './components/LogIn';
+import SignUp from './components/SignUp';
+import * as api from './api';
 
-function App() {
-  return (
-    <div className='App'>
-      <Header />
-      <Nav />
-      <Router>
-        <Home path='/' />
-        <Topics path='/topics/:topic' />
-        <Article path='/articles/:article_id'/>
-      </Router>
-    </div>
-  );
+class App extends Component {
+  state = { loggedInUser: null };
+
+  render() {
+    return (
+      <div className='App'>
+        <Header
+          loggedInUser={this.state.loggedInUser}
+          logUserOut={this.logUserOut}
+        />
+        <Nav />
+        <Router>
+          <Home path='/' />
+          <Topics path='/topics/:topic' />
+          <Article path='/articles/:article_id' />
+          <LogIn path='/login' logUserIn={this.logUserIn} />
+          <SignUp path='/signup' logUserIn={this.logUserIn} />
+        </Router>
+      </div>
+    );
+  }
+
+  logUserIn = (e, username, password) => {
+    e.preventDefault();
+    api.postLogIn(username, password).then(() => {
+      this.setState({ loggedInUser: username });
+    });
+  };
+  
+  logUserOut = () => {
+    this.setState({ loggedInUser: null });
+    localStorage.clear();
+  };
 }
 
 export default App;

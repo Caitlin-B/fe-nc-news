@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from '@reach/router'
 
-const Header = () => {
+const Header = (props) => {
+  const {loggedInUser, logUserOut} = props;
   return (
     <div>
       <header className='App-header'>
@@ -10,10 +11,14 @@ const Header = () => {
             <button className='NC-logo-button'>NC News</button>
           </h1>
         </Link>
-        <div className=''>
+        {loggedInUser === null ? <div>
+          <Link to='/login'>
           <button>Log in</button>
+          </Link>
+          <Link to='/signup'>
           <button>Sign up</button>
-        </div>
+          </Link>
+        </div> : <div><p>logged in as {loggedInUser} <button onClick={logUserOut}>Log out</button></p> </div>}
       </header>
     </div>
   );
