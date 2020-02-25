@@ -1,0 +1,6 @@
+.article_list_block {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  padding: 10px;
+}

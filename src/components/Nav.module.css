@@ -1,0 +1,12 @@
+.nav_bar {
+  display: flex;
+  background: #353535;
+  color: #b3c2f2 !important; 
+  text-decoration: none !important;
+  justify-content: space-around;
+}
+
+.topic_link {
+  color: #b3c2f2;
+  font-size: 1.5em;
+}

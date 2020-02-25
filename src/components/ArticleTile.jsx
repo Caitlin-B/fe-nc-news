@@ -1,5 +1,6 @@
 import React from 'react';
-import {Link} from '@reach/router';
+import { Link, navigate } from '@reach/router';
+import styles from './ArticleTile.module.css';
 
 const ArticleTile = ({ article }) => {
   const {
@@ -14,11 +15,17 @@ const ArticleTile = ({ article }) => {
   } = article;
 
   return (
-    <div>
-      <h2> {title}</h2>
-      <p>{topic}</p>
-      <p>
-        posted by {author} at {created_at}
+    <div className={styles.article_list_item}>
+      <Link to={`/articles/${article_id}`} style={{textDecoration:'none'}}>
+      <h2 className={styles.article_title}> {title} </h2> </Link>
+      <p className={styles.article_subheading}>
+        posted by {author} at {created_at} in{' '}
+        <button
+          className={styles.article_topic}
+          onClick={() => navigate(`/topics/${topic}`)}>
+          {' '}
+          {topic}
+        </button>
       </p>
       <p>
         {body
@@ -27,9 +34,9 @@ const ArticleTile = ({ article }) => {
           .join(' ')}
         ...
       </p>
-      <p>votes: {votes}</p>
-      <p>comments: {comment_count}</p>
-      <Link to={`/articles/${article_id}`}>See more...</Link>
+      <p>
+        {votes} votes {comment_count} Comments
+      </p>
     </div>
   );
 };
