@@ -1,0 +1,39 @@
+.App_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 2em;
+  align-items: center;
+  background-color: #b3c2f2;
+}
+
+.NC_logo {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-weight: bold;
+}
+
+.NC_logo_button {
+  font-size: 1.5em;
+  background: #b3c2f2;
+  border: none;
+  text-decoration: none;
+  font-weight: bold;
+  color: #353535;
+}
+
+.login_button {
+  font-size: 1em;
+  border: none;
+  background: #b3c2f2;
+  color: #353535;
+  padding: 10px;
+}
+
+.login_button:hover {
+  background: #353535;
+  color: #b3c2f2;
+  border-color:#353535;
+  border-radius: 5%; 
+  border-style: solid;
+}

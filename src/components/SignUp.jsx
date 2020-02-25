@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as api from '../api';
+import {navigate} from '@reach/router'
 
 class SignUp extends Component {
   state = { username: '', avatar_url: '', name: '', password: '' };
@@ -59,6 +60,7 @@ class SignUp extends Component {
     api.postUser(this.state).then(() => {
       this.props.logUserIn(e, this.state.username, this.state.password);
     });
+    navigate('/')
   };
 }
 

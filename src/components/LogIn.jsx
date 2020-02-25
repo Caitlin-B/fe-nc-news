@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from '@reach/router';
+import { Link, navigate } from '@reach/router';
 
 class LogIn extends Component {
   state = { username: '', password: '' };
@@ -10,6 +10,7 @@ class LogIn extends Component {
         <form
           onSubmit={e => {
             this.props.logUserIn(e, username, password);
+            navigate('/')
           }}>
           <label>
             Username:{' '}

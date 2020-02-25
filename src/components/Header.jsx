@@ -1,27 +1,39 @@
 import React from 'react';
-import {Link} from '@reach/router'
+import { Link, navigate } from '@reach/router';
+import styles from './Header.module.css';
 
-const Header = (props) => {
+const Header = props => {
   return (
     <div>
-      <header className='App-header'>
-        <Link to='/'>
-          <h1 className='NC-logo'>
-            <button className='NC-logo-button'>NC News</button>
+      <header className={styles.App_header}>
+          <h1 className={styles.NC_logo}>
+            <button className={styles.NC_logo_button} onClick={() => {navigate('/')}}>NC News</button>
           </h1>
-        </Link>
-        {!localStorage.username ? <div>
-          <Link to='/login'>
-          <button>Log in</button>
-          </Link>
-          <Link to='/signup'>
-          <button>Sign up</button>
-          </Link>
-        </div> : <div><p>logged in as {localStorage.username} <button onClick={() => {localStorage.clear()}}>Log out</button></p> </div>}
+        {!localStorage.username ? (
+          <div>
+            <Link to='/login'>
+              <button className={styles.login_button}>Log in</button>
+            </Link> {' '}
+            <Link to='/signup'>
+              <button className={styles.login_button}>Sign up</button>
+            </Link>
+          </div>
+        ) : (
+          <div>
+            <p>
+              logged in as {localStorage.username}{' '}
+              <button
+                onClick={() => {
+                  localStorage.clear();
+                }}>
+                Log out
+              </button>
+            </p>{' '}
+          </div>
+        )}
       </header>
     </div>
   );
-
 };
 
 export default Header;

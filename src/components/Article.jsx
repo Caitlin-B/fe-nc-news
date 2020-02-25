@@ -120,15 +120,16 @@ class Article extends Component {
         this.setState({ comments });
       });
   };
-  //needs to set state with new comment votes!!
+  
   upvoteComment = comment_id => {
     api.patchComment(comment_id, 1).then(() => {
       this.setState(currentState => {
-        return currentState.comments.map(comment => {
+          const newComments = currentState.comments.map(comment => {
           if (comment.comment_id === comment_id) {
             return { ...comment, votes: comment.votes + 1 };
           } else return {...comment};
         });
+        return {comments: newComments}
       });
     });
   };
