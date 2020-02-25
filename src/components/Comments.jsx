@@ -1,14 +1,16 @@
 import React from 'react';
+import {formatDate} from '../utils/utils'
 
 const Comments = props => {
   const { comments, deleteComment, upvoteComment, downvoteComment } = props;
   return comments.map(comment => {
     const { author, created_at, comment_id, body, votes } = comment;
+    const formattedDate = formatDate(created_at)
+    
 
     return (
       <div key={comment_id}>
-        <p>{author}</p>
-        <p>{created_at}</p>
+        <p>{author} on {formattedDate}</p>
         <p>{body}</p>
         <p>votes: {votes}</p>
         {author === localStorage.username && (

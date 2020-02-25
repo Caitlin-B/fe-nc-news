@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, navigate } from '@reach/router';
 import styles from './ArticleTile.module.css';
+import {formatDate} from '../utils/utils'
 
 const ArticleTile = ({ article }) => {
   const {
@@ -13,13 +14,16 @@ const ArticleTile = ({ article }) => {
     created_at,
     comment_count
   } = article;
+  
+  const formattedDate = formatDate(created_at)
 
   return (
     <div className={styles.article_list_item}>
-      <Link to={`/articles/${article_id}`} style={{textDecoration:'none'}}>
-      <h2 className={styles.article_title}> {title} </h2> </Link>
+      <Link to={`/articles/${article_id}`} style={{ textDecoration: 'none' }}>
+        <h2 className={styles.article_title}> {title} </h2>{' '}
+      </Link>
       <p className={styles.article_subheading}>
-        posted by {author} at {created_at} in{' '}
+        posted by {author} on {formattedDate} in{' '}
         <button
           className={styles.article_topic}
           onClick={() => navigate(`/topics/${topic}`)}>

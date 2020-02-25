@@ -3,6 +3,7 @@ import * as api from '../api';
 import Comments from '../components/Comments';
 import Toggle from '../components/Toggle';
 import AddComment from '../components/AddComment';
+import { formatDate } from '../utils/utils';
 
 class Article extends Component {
   state = {
@@ -21,6 +22,10 @@ class Article extends Component {
       created_at,
       comment_count
     } = this.state.article;
+    let formattedDate;
+    if (created_at) {
+      formattedDate = formatDate(created_at);
+    }
     return (
       <div>
         {this.state.articleIsLoading ? (
@@ -43,7 +48,7 @@ class Article extends Component {
             </h2>
             <p>{topic}</p>
             <p>
-              posted by {author} at {created_at}
+              posted by {author} on {formattedDate}
             </p>
             <p>{body}</p>
             <p>
@@ -120,20 +125,19 @@ class Article extends Component {
         this.setState({ comments });
       });
   };
-  
+
   upvoteComment = comment_id => {
     api.patchComment(comment_id, 1).then(() => {
       this.setState(currentState => {
-          const newComments = currentState.comments.map(comment => {
+        const newComments = currentState.comments.map(comment => {
           if (comment.comment_id === comment_id) {
             return { ...comment, votes: comment.votes + 1 };
-          } else return {...comment};
+          } else return { ...comment };
         });
-        return {comments: newComments}
+        return { comments: newComments };
       });
     });
   };
-
 
   downvoteComment = comment_id => {
     api.patchComment(comment_id, -1);
