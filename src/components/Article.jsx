@@ -29,8 +29,17 @@ class Article extends Component {
           <>
             <h2>
               {' '}
-              {title} <button onClick={this.upvoteArticle}>⬆️</button>{' '}
-              <button onClick={this.downvoteArticle}>⬇️</button>
+              {title}{' '}
+              <button onClick={this.upvoteArticle}>
+                <span role='img' aria-label='upvote'>
+                  ⬆️
+                </span>
+              </button>{' '}
+              <button onClick={this.downvoteArticle}>
+                <span role='img' aria-label='downvote'>
+                  ⬇️
+                </span>
+              </button>
             </h2>
             <p>{topic}</p>
             <p>
@@ -48,9 +57,18 @@ class Article extends Component {
         ) : (
           <>
             <Toggle buttonMessage='Add a comment'>
-              <AddComment articleId={this.props.article_id} />
+              <AddComment
+                articleId={this.props.article_id}
+                loggedInUser={this.props.loggedInUser}
+                showNewComment={this.showNewComment}
+              />
             </Toggle>
-            <Comments comments={this.state.comments} />
+            <Comments
+              comments={this.state.comments}
+              deleteComment={this.deleteComment}
+              upvoteComment={this.upvoteComment}
+              downvoteComment={this.downvoteComment}
+            />
           </>
         )}
       </div>
@@ -69,23 +87,55 @@ class Article extends Component {
   }
 
   //add functionality so you can only vote once??
-  
+
   upvoteArticle = () => {
-    console.log('upvoted!');
-    api.patchCommentVotes(this.props.article_id, 1).then(votes => {
-      console.log(votes);
+    api.patchArticleVotes(this.props.article_id, 1).then(votes => {
       this.setState(currentState => {
-        return { article: {...currentState.article, votes}};
+        return { article: { ...currentState.article, votes } };
       });
     });
   };
 
   downvoteArticle = () => {
-    api.patchCommentVotes(this.props.article_id, -1).then(votes => {
+    api.patchArticleVotes(this.props.article_id, -1).then(votes => {
       this.setState(currentState => {
-        return { article: {...currentState.article, votes}};
+        return { article: { ...currentState.article, votes } };
       });
     });
+  };
+
+  showNewComment = comment => {
+    this.setState(currentState => {
+      return { comments: [comment, ...currentState.comments] };
+    });
+  };
+
+  deleteComment = (e, comment_id) => {
+    api
+      .removeComment(comment_id)
+      .then(() => {
+        return api.fetchComments(this.props.article_id);
+      })
+      .then(comments => {
+        this.setState({ comments });
+      });
+  };
+  //needs to set state with new comment votes!!
+  upvoteComment = comment_id => {
+    api.patchComment(comment_id, 1).then(() => {
+      this.setState(currentState => {
+        return currentState.comments.map(comment => {
+          if (comment.comment_id === comment_id) {
+            return { ...comment, votes: comment.votes + 1 };
+          } else return {...comment};
+        });
+      });
+    });
+  };
+
+
+  downvoteComment = comment_id => {
+    api.patchComment(comment_id, -1);
   };
 }
 

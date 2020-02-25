@@ -45,6 +45,8 @@ class LogIn extends Component {
   handleChange = (e, input) => {
     this.setState({ [input]: e.target.value });
   };
+
+
 }
 
 export default LogIn;

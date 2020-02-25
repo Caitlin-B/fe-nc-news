@@ -1,23 +1,31 @@
 import React, { Component } from 'react';
+import * as api from '../api';
 
 class AddComment extends Component {
-  state = { commentInput: '' };
+  state = { commentBody: '' };
   render() {
     return (
-      <form onChange={this.handleChange}>
-        <input type='text'></input>
-        <button onClick={this.postComment}>Submit</button>
+      <form onSubmit={this.postComment}>
+        <input type='text' value={this.state.commentBody} onChange={this.handleChange}></input>
+        <button >Submit</button>
       </form>
     );
   }
 
   handleChange = event => {
-    this.setState({ commentInput: event.target.value });
+    this.setState({ commentBody: event.target.value });
   };
-  //make a post request for comment with jwt
 
   postComment = event => {
     event.preventDefault();
+    const { articleId } = this.props;
+    const { commentBody } = this.state;
+    const username = localStorage.username;
+
+    api.postComment(articleId, commentBody, username).then(comment => {
+      this.props.showNewComment(comment);
+      this.setState({ commentBody: '' });
+    });
   };
 }
 

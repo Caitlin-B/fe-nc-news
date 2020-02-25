@@ -16,15 +16,15 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        <Header
-          loggedInUser={this.state.loggedInUser}
-          logUserOut={this.logUserOut}
-        />
+        <Header />
         <Nav />
         <Router>
           <Home path='/' />
           <Topics path='/topics/:topic' />
-          <Article path='/articles/:article_id' />
+          <Article
+            path='/articles/:article_id'
+            loggedInUser={this.state.loggedInUser}
+          />
           <LogIn path='/login' logUserIn={this.logUserIn} />
           <SignUp path='/signup' logUserIn={this.logUserIn} />
         </Router>
@@ -37,11 +37,6 @@ class App extends Component {
     api.postLogIn(username, password).then(() => {
       this.setState({ loggedInUser: username });
     });
-  };
-  
-  logUserOut = () => {
-    this.setState({ loggedInUser: null });
-    localStorage.clear();
   };
 }
 
