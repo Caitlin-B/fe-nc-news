@@ -24,7 +24,8 @@
 
 .login_button {
   font-size: 1.5em;
-  border: none;
+  border-style: solid;
+  border-color: #b3c2f2;
   background: #b3c2f2;
   color: #353535;
   padding: 10px;

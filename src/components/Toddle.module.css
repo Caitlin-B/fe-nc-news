@@ -1,0 +1,21 @@
+.toggle_block {
+  margin-left: 2em;
+  margin-right: 2em;
+  display: flex;
+}
+
+.toggle_button {
+  border: none;
+  font-size: 1em;
+  color: #353535;
+}
+
+.toggle_button:hover {
+  background: #353535;
+  color: #b3c2f2;
+}
+
+/* .add_comment_block {
+  display: inline;
+}  */
+/* doesnt work, want to get inline */

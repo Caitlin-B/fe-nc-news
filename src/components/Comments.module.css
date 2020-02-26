@@ -1,0 +1,41 @@
+.comments_list {
+  margin: 20px;
+}
+
+.comment_tile {
+  border-bottom: solid;
+  border-bottom-color: #353535;
+  margin-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 0.5em;
+  background-color: white;
+  color: #353535;
+}
+
+.comment_body {
+  font-size: 1.25em;
+}
+
+.comment_vote_button {
+  background: none;
+  border: none;
+  font-size: 1em;
+}
+
+.comment_details_block {
+  margin:0;
+}
+
+.voting_block{
+  margin:0;
+}
+
+.delete_comment_button {
+  border: none;
+  text-decoration: underline;
+}
+
+.you_name_replacement {
+  font-weight: bold;
+}

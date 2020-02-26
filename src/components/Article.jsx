@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import {navigate} from '@reach/router'
 import * as api from '../api';
 import Comments from '../components/Comments';
 import Toggle from '../components/Toggle';
 import AddComment from '../components/AddComment';
 import { formatDate } from '../utils/utils';
+import styles from './Article.module.css';
 
 class Article extends Component {
   state = {
@@ -31,30 +33,35 @@ class Article extends Component {
         {this.state.articleIsLoading ? (
           <p>loading article...</p>
         ) : (
-          <>
-            <h2>
+          <div className={styles.full_article_tile}>
+            <h2 className={styles.article_title}>
               {' '}
               {title}{' '}
-              <button onClick={this.upvoteArticle}>
+              <button onClick={this.upvoteArticle} className={styles.voting_button}>
                 <span role='img' aria-label='upvote'>
                   ⬆️
                 </span>
               </button>{' '}
-              <button onClick={this.downvoteArticle}>
+              <button onClick={this.downvoteArticle} className={styles.voting_button}>
                 <span role='img' aria-label='downvote'>
                   ⬇️
                 </span>
               </button>
             </h2>
-            <p>{topic}</p>
-            <p>
-              posted by {author} on {formattedDate}
-            </p>
+            <p className={styles.article_subheading}>
+        posted by {author} on {formattedDate} in{' '}
+        <button
+          className={styles.article_topic}
+          onClick={() => navigate(`/topics/${topic}`)}>
+          {' '}
+          {topic}
+        </button>
+      </p>
             <p>{body}</p>
             <p>
-              votes: {votes} comments: {comment_count}
+              {votes} votes {comment_count} comments
             </p>
-          </>
+          </div>
         )}
         <br></br>
         {this.state.commentsIsLoading ? (
@@ -68,7 +75,7 @@ class Article extends Component {
                 showNewComment={this.showNewComment}
               />
             </Toggle>
-            <Comments
+            <Comments 
               comments={this.state.comments}
               deleteComment={this.deleteComment}
               upvoteComment={this.upvoteComment}
