@@ -3,12 +3,12 @@ import * as api from '../api';
 import styles from './AddComment.module.css'
 
 class AddComment extends Component {
-  state = { commentBody: '' };
+  state = { commentBody: '' , err: false};
   render() {
     return (
       <form onSubmit={this.postComment}>
         <input type='text' className={styles.comment_input}value={this.state.commentBody} onChange={this.handleChange}></input> {' '}
-        <button className={styles.submit_comment_button} >Submit</button>
+        <button className={styles.submit_comment_button} >Submit</button> {this.state.err && <p className={styles.err_msg}>you must be logged in to post a comment!</p>}
       </form>
     );
   }
@@ -26,7 +26,7 @@ class AddComment extends Component {
     api.postComment(articleId, commentBody, username).then(comment => {
       this.props.showNewComment(comment);
       this.setState({ commentBody: '' });
-    });
+    }).catch(() => {this.setState({err: true})})
   };
 }
 

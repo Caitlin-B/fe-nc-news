@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, navigate } from '@reach/router';
+import { Link } from '@reach/router';
 import styles from './LogIn.module.css';
 
 class LogIn extends Component {
@@ -9,7 +9,7 @@ class LogIn extends Component {
     return (
       <div className={styles.login_form_block}>
         {this.props.invalidUser && (
-          <p> Invalid username/password, please try again</p>
+          <p className={styles.err_msg}> Invalid username/password, please try again</p>
         )}
         <form
           className={styles.login_form}

@@ -22,7 +22,7 @@ class User extends Component {
     ) : (
       <div>
         <section className={styles.user_tile}>
-          <img className={styles.avatar_pic} src={avatar_url}></img>
+          <img className={styles.avatar_pic} src={avatar_url} alt='User avatar'></img>
           <div>
             <h2 className={styles.user_full_name}>{name}</h2>
             <h3>{username}</h3>

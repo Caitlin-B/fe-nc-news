@@ -41,3 +41,7 @@
   border-style: solid;
   border-color: #353535;
 }
+
+.err_msg {
+  color: red;
+}

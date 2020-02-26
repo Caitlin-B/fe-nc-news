@@ -46,3 +46,7 @@ justify-content: space-between;
   margin-top: 0.5em;
   font-size: 1em;
 }
+
+.err_msg{
+  color: red;
+}
