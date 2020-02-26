@@ -21,7 +21,12 @@ const Header = props => {
         ) : (
           <div>
             <p className={styles.logged_in_text}>
-              logged in as {localStorage.username}{' '}
+              logged in as <button
+                  className={styles.user_button}
+                  onClick={() => navigate(`/user/${localStorage.username}`)}>
+                  {' '}
+                  {localStorage.username}
+                </button>
               <button className={styles.logout_button}
                 onClick={() => {
                   localStorage.clear();

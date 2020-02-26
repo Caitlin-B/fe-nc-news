@@ -18,9 +18,12 @@ class User extends Component {
     ) : (
       <div>
         <section className={styles.user_tile}>
-          <img src={avatar_url}></img>
-          <h2>{name}</h2>
-          <h3>{username}</h3>
+          <img className={styles.avatar_pic} src={avatar_url}></img>
+          <div>
+            <h2 className={styles.user_full_name}>{name}</h2>
+            <h3>{username}</h3>
+            <h3>{this.state.articles.length} posted articles</h3>
+          </div>
         </section>
         <ArticlesList articles={this.state.articles} />
       </div>

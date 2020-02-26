@@ -61,3 +61,11 @@
   font-size: 1em;
 
 }
+
+.user_button {
+  border: none;
+  font-size: 1em;
+  padding: 0;
+  font-weight: bold;
+  background: none;
+}

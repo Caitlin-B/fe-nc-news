@@ -1,3 +1,20 @@
 .user_tile {
   display: flex;
+  background: #b3c2f2;
+  margin: 2%;
+  color: #353535;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: #353535;
 }
+.avatar_pic{
+  margin:3%;
+  width: 30%;
+}
+
+@media only screen and (max-width: 600px) {
+  .avatar_pic {
+    width: 50%;
+  }
+}
+
