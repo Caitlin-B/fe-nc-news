@@ -1,0 +1,48 @@
+.post_article_form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em 0 1em 0;
+  padding: 1%;
+  border-radius: 5px;
+  color: #353535;
+  border-style: solid;
+  border-color: #353535;
+  background: #b3c2f2;
+}
+
+.article_input_block {
+display: flex;
+justify-content: space-between;
+
+}
+
+.article_input {
+  width: 40em;
+  padding: 4px;
+  margin: 0 0 0 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size:1em;
+}
+
+@media only screen and (max-width: 600px){
+  .article_input {
+    width: 80%;
+    padding: 4px;
+    margin: 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }}
+
+.submit_article_button {
+  border: none;
+  background: #353535;
+  color: #b3c2f2;
+  border-radius: 5px;
+  margin-top: 0.5em;
+  font-size: 1em;
+}

@@ -2,6 +2,7 @@
   border: none;
   background: #353535;
   color: #b3c2f2;
+  border-radius: 5px;
 }
 
 .comment_input {

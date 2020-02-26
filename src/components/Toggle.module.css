@@ -1,6 +1,6 @@
 .toggle_block {
   margin-left: 10px;
-  margin-right: 10px;
+  margin: 10px;
   border-bottom: solid;
   border-bottom-color: #353535;
   padding-bottom: 1em;
@@ -10,16 +10,12 @@
 .toggle_button {
   border: none;
   margin-right: 1em;
+  margin-bottom: 0.5em;
   font-size: 1em;
-  color: #353535;
-  background: none;
-  height:1.5em;
-  border-radius: 5px;
-}
-
-.toggle_button:hover {
   background: #353535;
   color: #b3c2f2;
+  height:1.5em;
+  border-radius: 5px;
 }
 
 @media only screen and (max-width: 800px){

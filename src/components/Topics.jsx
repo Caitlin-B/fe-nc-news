@@ -19,6 +19,7 @@ class Topics extends Component {
         <h3 className={styles.topic_description}>{this.state.topicDescription}</h3>
         </div>
         <Toggle buttonMessage={`Post an article about ${topic}`}>
+          <br></br>
         <PostArticle topic={topic}/>
         </Toggle>
         <SortArticles filterOptions={this.filterOptions} />

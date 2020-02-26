@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as api from '../api';
-import {navigate} from '@reach/router'
+import {navigate} from '@reach/router';
+import styles from './PostArticle.module.css'
 
 class PostArticle extends Component {
   state= {
@@ -11,13 +12,20 @@ class PostArticle extends Component {
     return (
       <div>
         <form onSubmit={this.postTopic}>
+          <section className={styles.post_article_form}>
           <label>
-          Title: <input type='text' onChange={(e) => {this.handleChange(e, 'title')}} require/>
+            <div className={styles.article_input_block}>
+          Title: <input type='text' className={styles.article_input} onChange={(e) => {this.handleChange(e, 'title')}} required/>
+          </div>
           </label>
+          <br></br>
           <label>
-          Article: <input type='text' onChange={(e) => {this.handleChange(e, 'body')}} require/>
+          <div className={styles.article_input_block}>
+          Article: <input type='text' className={styles.article_input} onChange={(e) => {this.handleChange(e, 'body')}} required/>
+          </div>
           </label>
-          <button>Submit</button>
+          </section>
+          <button className={styles.submit_article_button}>Submit</button>
         </form>
       </div>
     );
