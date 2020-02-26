@@ -1,0 +1,21 @@
+.topic_heading {
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+
+.topic_title {
+  color: #353535;
+  font-size: 2.5em;
+}
+
+.topic_description {
+  color: #353535;
+}
+
+@media only screen and (min-width: 600px) {
+  .topic_heading {
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+}

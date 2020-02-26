@@ -1,4 +1,5 @@
 import React from 'react';
+import { navigate } from '@reach/router';
 import { formatDate } from '../utils/utils';
 import styles from './Comments.module.css';
 
@@ -14,9 +15,21 @@ const Comments = props => {
           <div key={comment_id} className={styles.comment_tile}>
             <p className={styles.comment_body}>{body}</p>
             <p className={styles.comment_details_block}>
-              posted by {author=== localStorage.username ? <span className={styles.you_name_replacement}> you </span>: author} on {formattedDate}{' '}
+              posted by{' '}
+              {author === localStorage.username ? (
+                <span className={styles.you_name_replacement}> you </span>
+              ) : (
+                <button
+                  className={styles.user_button}
+                  onClick={() => navigate(`/user/${author}`)}>
+                  {' '}
+                  {author}
+                </button>
+              )}{' '}
+              on {formattedDate}{' '}
               {author === localStorage.username && (
-                <button className={styles.delete_comment_button}
+                <button
+                  className={styles.delete_comment_button}
                   onClick={e => {
                     deleteComment(e, comment_id);
                   }}>
@@ -25,8 +38,9 @@ const Comments = props => {
               )}
             </p>
             <p className={styles.voting_block}>
-              {votes} votes {' '}
-              <button className={styles.comment_vote_button}
+              {votes} votes{' '}
+              <button
+                className={styles.comment_vote_button}
                 onClick={() => {
                   upvoteComment(comment_id);
                 }}>
@@ -34,7 +48,8 @@ const Comments = props => {
                   ⬆️
                 </span>
               </button>{' '}
-              <button className={styles.comment_vote_button}
+              <button
+                className={styles.comment_vote_button}
                 onClick={() => {
                   downvoteComment(comment_id);
                 }}>

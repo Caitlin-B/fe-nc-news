@@ -23,7 +23,12 @@ const ArticleTile = ({ article }) => {
         <h2 className={styles.article_title}> {title} </h2>{' '}
       </Link>
       <p className={styles.article_subheading}>
-        posted by {author} on {formattedDate} in{' '}
+        posted by <button
+          className={styles.article_topic}
+          onClick={() => navigate(`/user/${author}`)}>
+          {' '}
+          {author}
+        </button> on {formattedDate} in{' '}
         <button
           className={styles.article_topic}
           onClick={() => navigate(`/topics/${topic}`)}>

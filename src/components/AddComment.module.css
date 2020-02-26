@@ -1,0 +1,27 @@
+.submit_comment_button {
+  border: none;
+  background: #353535;
+  color: #b3c2f2;
+}
+
+.comment_input {
+  width: 40em;
+  padding: 4px;
+  margin: 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size:1em;
+}
+
+@media only screen and (max-width: 600px){
+.comment_input {
+  width: 10em;
+  padding: 4px;
+  margin: 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}}

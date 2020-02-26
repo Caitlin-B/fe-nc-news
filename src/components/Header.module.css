@@ -4,6 +4,7 @@
   padding: 2em;
   align-items: center;
   background-color: #b3c2f2;
+  color: #353535;
 }
 
 .NC_logo {
@@ -35,6 +36,28 @@
   background: #353535;
   color: #b3c2f2;
   border-color:#353535;
-  border-radius: 5%; 
+  border-radius: 5px; 
   border-style: solid;
+}
+.logout_button {
+  font-size: 1em;
+  border-style: solid;
+  border-color: #b3c2f2;
+  background: #b3c2f2;
+  color: #353535;
+  padding: 10px;
+  text-decoration: underline;
+}
+
+.logout_button:hover {
+  background: #353535;
+  color: #b3c2f2;
+  border-color:#353535;
+  border-radius: 5px; 
+  border-style: solid;
+}
+
+.logged_in_text {
+  font-size: 1em;
+
 }

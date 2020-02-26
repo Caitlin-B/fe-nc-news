@@ -20,9 +20,9 @@ const Header = props => {
           </div>
         ) : (
           <div>
-            <p>
+            <p className={styles.logged_in_text}>
               logged in as {localStorage.username}{' '}
-              <button
+              <button className={styles.logout_button}
                 onClick={() => {
                   localStorage.clear();
                 }}>

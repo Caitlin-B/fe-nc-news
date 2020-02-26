@@ -14,6 +14,7 @@
   font-size: 1em;
   padding: 0;
   font-weight: bold;
+  background: none;
 }
 
 .article_subheading {
@@ -22,14 +23,20 @@
 
 .article_title {
   margin-bottom: 0;
-  margin-top:0;
+  margin-top: 0;
   color: #353535;
   font-size: 2.5em;
 }
 
 .voting_button {
   border: none;
-  font-size: 0.70em;
+  font-size: 0.7em;
+  background: none;
 }
 
-
+.user_button {
+  border: none;
+  font-size: 1em;
+  padding: 0;
+  font-weight: bold;
+}

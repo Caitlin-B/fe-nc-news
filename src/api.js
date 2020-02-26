@@ -60,12 +60,18 @@ export const postComment = (article_id, body, username) => {
     .then(res => res.data.comment);
 };
 
-export const removeComment = (comment_id) => {
-  return axios.delete(baseURL + `/comments/${comment_id}`)
-}
+export const removeComment = comment_id => {
+  return axios.delete(baseURL + `/comments/${comment_id}`);
+};
 
 export const patchComment = (comment_id, inc_votes) => {
   return axios
     .patch(baseURL + `/comments/${comment_id}`, { inc_votes })
     .then(res => res.data.comment.votes);
-}
+};
+
+export const getUser = username => {
+  return axios
+    .get(baseURL + `/users/${username}`)
+    .then(res => res.data.user);
+};

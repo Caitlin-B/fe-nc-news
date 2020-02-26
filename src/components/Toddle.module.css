@@ -1,13 +1,20 @@
 .toggle_block {
-  margin-left: 2em;
-  margin-right: 2em;
+  margin-left: 10px;
+  margin-right: 10px;
   display: flex;
+  border-bottom: solid;
+  border-bottom-color: #353535;
+  padding-bottom: 1em;
+  padding-left: 1em;
 }
 
 .toggle_button {
   border: none;
+  margin-right: 1em;
   font-size: 1em;
   color: #353535;
+  background: none;
+  height:1.5em;
 }
 
 .toggle_button:hover {
@@ -15,7 +22,12 @@
   color: #b3c2f2;
 }
 
-/* .add_comment_block {
-  display: inline;
-}  */
-/* doesnt work, want to get inline */
+@media only screen and (max-width: 800px){
+  .toggle_button {
+    border: none;
+    margin-right: 1em;
+    font-size: 1em;
+    color: #b3c2f2;
+    background: #353535;
+  }
+}

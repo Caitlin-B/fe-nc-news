@@ -9,6 +9,7 @@ import Article from './components/Article';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 import * as api from './api';
+import User from './components/User';
 
 class App extends Component {
   state = { loggedInUser: null };
@@ -27,6 +28,7 @@ class App extends Component {
           />
           <LogIn path='/login' logUserIn={this.logUserIn} />
           <SignUp path='/signup' logUserIn={this.logUserIn} />
+          <User path='/user/:username'/>
         </Router>
       </div>
     );

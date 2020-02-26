@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as api from '../api';
 import ArticlesList from '../components/ArticlesList';
 import SortArticles from '../components/SortArticles';
+import styles from './Topics.module.css'
 
 class Topics extends Component {
   state = { articlesByTopic: [], topicDescription: '' };
@@ -9,8 +10,10 @@ class Topics extends Component {
   render() {
     return (
       <>
-        <h2>{this.props.topic}</h2>
-        <h3>{this.state.topicDescription}</h3>
+      <div className={styles.topic_heading}>
+        <h2 className={styles.topic_title}>{this.props.topic}</h2> 
+        <h3 className={styles.topic_description}>{this.state.topicDescription}</h3>
+        </div>
         <SortArticles filterOptions={this.filterOptions} />
         <ArticlesList articles={this.state.articlesByTopic} />
       </>

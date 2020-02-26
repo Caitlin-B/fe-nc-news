@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import * as api from '../api';
+import styles from './AddComment.module.css'
 
 class AddComment extends Component {
   state = { commentBody: '' };
   render() {
     return (
       <form onSubmit={this.postComment}>
-        <input type='text' value={this.state.commentBody} onChange={this.handleChange}></input>
-        <button >Submit</button>
+        <input type='text' className={styles.comment_input}value={this.state.commentBody} onChange={this.handleChange}></input> {' '}
+        <button className={styles.submit_comment_button} >Submit</button>
       </form>
     );
   }

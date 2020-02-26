@@ -49,7 +49,17 @@ class Article extends Component {
               </button>
             </h2>
             <p className={styles.article_subheading}>
-        posted by {author} on {formattedDate} in{' '}
+        posted by {' '}
+              {author === localStorage.username ? (
+                <span className={styles.you_name_replacement}> you </span>
+              ) : (
+                <button
+                  className={styles.user_button}
+                  onClick={() => navigate(`/user/${author}`)}>
+                  {' '}
+                  {author}
+                </button>
+              )}{' '} on {formattedDate} in{' '}
         <button
           className={styles.article_topic}
           onClick={() => navigate(`/topics/${topic}`)}>
