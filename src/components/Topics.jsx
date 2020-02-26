@@ -2,18 +2,25 @@ import React, { Component } from 'react';
 import * as api from '../api';
 import ArticlesList from '../components/ArticlesList';
 import SortArticles from '../components/SortArticles';
-import styles from './Topics.module.css'
+import styles from './Topics.module.css';
+import Toggle from '../components/Toggle';
+import PostArticle from './PostArticle';
+
 
 class Topics extends Component {
   state = { articlesByTopic: [], topicDescription: '' };
 
   render() {
+    const {topic} = this.props;
     return (
       <>
       <div className={styles.topic_heading}>
-        <h2 className={styles.topic_title}>{this.props.topic}</h2> 
+        <h2 className={styles.topic_title}>{topic}</h2> 
         <h3 className={styles.topic_description}>{this.state.topicDescription}</h3>
         </div>
+        <Toggle buttonMessage={`Post an article about ${topic}`}>
+        <PostArticle topic={topic}/>
+        </Toggle>
         <SortArticles filterOptions={this.filterOptions} />
         <ArticlesList articles={this.state.articlesByTopic} />
       </>

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import {navigate} from '@reach/router'
+import { navigate } from '@reach/router';
 import * as api from '../api';
 import Comments from '../components/Comments';
 import Toggle from '../components/Toggle';
 import AddComment from '../components/AddComment';
 import { formatDate } from '../utils/utils';
 import styles from './Article.module.css';
+import ErrorPage from './ErrorPage';
 
 class Article extends Component {
   state = {
@@ -28,7 +29,9 @@ class Article extends Component {
     if (created_at) {
       formattedDate = formatDate(created_at);
     }
-    return (
+    return this.state.err ? (
+      <ErrorPage path='/*' err={{ msg: 'Not Found!', status: 404 }} />
+    ) : (
       <div>
         {this.state.articleIsLoading ? (
           <p>loading article...</p>
@@ -37,19 +40,23 @@ class Article extends Component {
             <h2 className={styles.article_title}>
               {' '}
               {title}{' '}
-              <button onClick={this.upvoteArticle} className={styles.voting_button}>
+              <button
+                onClick={this.upvoteArticle}
+                className={styles.voting_button}>
                 <span role='img' aria-label='upvote'>
                   ⬆️
                 </span>
               </button>{' '}
-              <button onClick={this.downvoteArticle} className={styles.voting_button}>
+              <button
+                onClick={this.downvoteArticle}
+                className={styles.voting_button}>
                 <span role='img' aria-label='downvote'>
                   ⬇️
                 </span>
               </button>
             </h2>
             <p className={styles.article_subheading}>
-        posted by {' '}
+              posted by{' '}
               {author === localStorage.username ? (
                 <span className={styles.you_name_replacement}> you </span>
               ) : (
@@ -59,17 +66,23 @@ class Article extends Component {
                   {' '}
                   {author}
                 </button>
-              )}{' '} on {formattedDate} in{' '}
-        <button
-          className={styles.article_topic}
-          onClick={() => navigate(`/topics/${topic}`)}>
-          {' '}
-          {topic}
-        </button>
-      </p>
+              )}{' '}
+              on {formattedDate} in{' '}
+              <button
+                className={styles.article_topic}
+                onClick={() => navigate(`/topics/${topic}`)}>
+                {' '}
+                {topic}
+              </button>
+            </p>
             <p>{body}</p>
             <p>
-              {votes} votes {comment_count} comments
+              {votes} votes {comment_count} comments{' '}
+              <button
+                className={styles.delete_article}
+                onClick={this.deleteArticle}>
+                Delete article
+              </button>
             </p>
           </div>
         )}
@@ -85,7 +98,7 @@ class Article extends Component {
                 showNewComment={this.showNewComment}
               />
             </Toggle>
-            <Comments 
+            <Comments
               comments={this.state.comments}
               deleteComment={this.deleteComment}
               upvoteComment={this.upvoteComment}
@@ -103,9 +116,14 @@ class Article extends Component {
     api.fetchArticle(article_id).then(article => {
       this.setState({ article, articleIsLoading: false });
     });
-    api.fetchComments(article_id).then(comments => {
-      this.setState({ comments, commentsIsLoading: false });
-    });
+    api
+      .fetchComments(article_id)
+      .then(comments => {
+        this.setState({ comments, commentsIsLoading: false });
+      })
+      .catch(() => {
+        this.setState({ err: { msg: 'Not Found!', status: 404 } });
+      });
   }
 
   //add functionality so you can only vote once??
@@ -123,6 +141,12 @@ class Article extends Component {
       this.setState(currentState => {
         return { article: { ...currentState.article, votes } };
       });
+    });
+  };
+
+  deleteArticle = () => {
+    api.removeArticle(this.props.article_id).then(() => {
+      navigate('/');
     });
   };
 

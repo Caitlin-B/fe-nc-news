@@ -75,3 +75,13 @@ export const getUser = username => {
     .get(baseURL + `/users/${username}`)
     .then(res => res.data.user);
 };
+
+export const postArticle = (newComment) => {
+  return axios.post(baseURL + '/articles', newComment, {
+    headers: { Authorization: 'BEARER ' + localStorage.token }
+  }).then(res => res.data.article.article_id)
+}
+
+export const removeArticle = article_id => {
+  return axios.delete(baseURL + `/articles/${article_id}`)
+}

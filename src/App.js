@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Router } from '@reach/router';
+import { Router, navigate} from '@reach/router';
 import Home from './components/Home';
 import Header from './components/Header';
 import Nav from './components/Nav';
@@ -10,14 +10,15 @@ import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 import * as api from './api';
 import User from './components/User';
+import ErrorPage from './components/ErrorPage';
 
 class App extends Component {
-  state = { loggedInUser: null };
+  state = { loggedInUser: null, invalidUser: false };
 
   render() {
     return (
       <div className='App'>
-        <Header />
+        <Header logUserOut={this.logUserOut} />
         <Nav />
         <Router>
           <Home path='/' />
@@ -26,9 +27,14 @@ class App extends Component {
             path='/articles/:article_id'
             loggedInUser={this.state.loggedInUser}
           />
-          <LogIn path='/login' logUserIn={this.logUserIn} />
+          <LogIn
+            path='/login'
+            logUserIn={this.logUserIn}
+            invalidUser={this.state.invalidUser}
+          />
           <SignUp path='/signup' logUserIn={this.logUserIn} />
-          <User path='/user/:username'/>
+          <User path='/user/:username' />
+          <ErrorPage path='/*' err={{ msg: 'Not Found!', status: 404 }} />
         </Router>
       </div>
     );
@@ -36,9 +42,20 @@ class App extends Component {
 
   logUserIn = (e, username, password) => {
     e.preventDefault();
-    api.postLogIn(username, password).then(() => {
-      this.setState({ loggedInUser: username });
-    });
+    api
+      .postLogIn(username, password)
+      .then(() => {
+        this.setState({ loggedInUser: username, invalidUser: false });
+        navigate(`/user/${username}`);
+      })
+      .catch(() => {
+        this.setState({ invalidUser: true });
+      });
+  };
+
+  logUserOut = () => {
+    localStorage.clear();
+    this.setState({ loggedInUser: null });
   };
 }
 

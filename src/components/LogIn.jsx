@@ -8,32 +8,39 @@ class LogIn extends Component {
     const { username, password } = this.state;
     return (
       <div className={styles.login_form_block}>
-        <form className={styles.login_form}
+        {this.props.invalidUser && (
+          <p> Invalid username/password, please try again</p>
+        )}
+        <form
+          className={styles.login_form}
           onSubmit={e => {
             this.props.logUserIn(e, username, password);
-            navigate('/');
           }}>
           <label>
-          <div className={styles.form_input}>
-            Username:{' '}
-            <input className={styles.text_input}
-              type='text'
-              onChange={e => {
-                this.handleChange(e, 'username');
-              }} required
-            />
+            <div className={styles.form_input}>
+              Username:{' '}
+              <input
+                className={styles.text_input}
+                type='text'
+                onChange={e => {
+                  this.handleChange(e, 'username');
+                }}
+                required
+              />
             </div>
           </label>
           <br></br>
           <label>
             <div className={styles.form_input}>
-            Password:{' '}
-            <input className={styles.text_input}
-              type='text'
-              onChange={e => {
-                this.handleChange(e, 'password');
-              }} required
-            />
+              Password:{' '}
+              <input
+                className={styles.text_input}
+                type='password'
+                onChange={e => {
+                  this.handleChange(e, 'password');
+                }}
+                required
+              />
             </div>
           </label>
           <br></br>

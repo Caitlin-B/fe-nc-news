@@ -46,7 +46,7 @@
   background: #b3c2f2;
   color: #353535;
   padding: 10px;
-  text-decoration: underline;
+  text-decoration: underline; 
 }
 
 .logout_button:hover {
@@ -58,13 +58,14 @@
 }
 
 .logged_in_text {
-  font-size: 1em;
+  font-size: 1.25em;
+  margin:0;
 
 }
 
 .user_button {
   border: none;
-  font-size: 1em;
+  font-size: 1.25em;
   padding: 0;
   font-weight: bold;
   background: none;

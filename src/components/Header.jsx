@@ -28,9 +28,7 @@ const Header = props => {
                   {localStorage.username}
                 </button>
               <button className={styles.logout_button}
-                onClick={() => {
-                  localStorage.clear();
-                }}>
+                onClick={props.logUserOut}>
                 Log out
               </button>
             </p>{' '}

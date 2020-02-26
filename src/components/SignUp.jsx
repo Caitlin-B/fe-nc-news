@@ -48,7 +48,7 @@ class SignUp extends Component {
         <br></br>
         <label>
         <div className={styles.form_input}>
-          Avatar Url:{' '}
+          Display Image Url:{' '}
           <input className={styles.text_input}
             type='text'
             onChange={e => {

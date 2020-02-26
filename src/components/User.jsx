@@ -2,18 +2,22 @@ import React, { Component } from 'react';
 import * as api from '../api';
 import ArticlesList from './ArticlesList';
 import styles from './User.module.css';
+import ErrorPage from './ErrorPage';
 
 class User extends Component {
   state = {
     user: {},
     isLoading: true,
-    articles: []
+    articles: [],
+    err: null
   };
 
   render() {
     const { username, name, avatar_url } = this.state.user;
 
-    return this.state.isLoading ? (
+    return this.state.err ? (
+      <ErrorPage path='/*' err={{ msg: 'Not Found!', status: 404 }} />
+    ) : this.state.isLoading ? (
       <p>loading...</p>
     ) : (
       <div>
@@ -36,9 +40,13 @@ class User extends Component {
     return Promise.all([
       api.getUser(username),
       api.fetchArticles({ author: this.props.username })
-    ]).then(([user, articles]) => {
-      this.setState({ user, articles, isLoading: false });
-    });
+    ])
+      .then(([user, articles]) => {
+        this.setState({ user, articles, isLoading: false });
+      })
+      .catch(() => {
+        this.setState({ err: { msg: 'Not Found!', status: 404 } });
+      });
   }
 
   getUserArticles = () => {

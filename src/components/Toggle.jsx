@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styles from './Toddle.module.css'
+import styles from './Toggle.module.css'
 
 class Toggle extends Component {
   state = { isShowing: false };

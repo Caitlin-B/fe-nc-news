@@ -28,6 +28,11 @@
   font-size: 2.5em;
 }
 
+.delete_article {
+  border: none;
+  text-decoration: underline;
+}
+
 .voting_button {
   border: none;
   font-size: 0.7em;
@@ -38,5 +43,9 @@
   border: none;
   font-size: 1em;
   padding: 0;
+  font-weight: bold;
+}
+
+.you_name_replacement {
   font-weight: bold;
 }
