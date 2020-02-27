@@ -35,27 +35,48 @@ class VotingButtons extends Component {
 
   upvoteButton = () => {
     const { upvoted } = this.state;
-    const { upvoteArticle, downvoteArticle } = this.props;
+    const { upvoteItem, downvoteItem, comment_id } = this.props;
 
-    if (!upvoted) {
-      upvoteArticle();
-      this.setState({ upvoted: true });
+    if(comment_id) {
+      if (!upvoted) {
+        upvoteItem(comment_id);
+        this.setState({ upvoted: true });
+      } else {
+        downvoteItem(comment_id);
+        this.setState({ upvoted: false });
+      }
     } else {
-      downvoteArticle();
-      this.setState({ upvoted: false });
+      if (!upvoted) {
+        upvoteItem();
+        this.setState({ upvoted: true });
+      } else {
+        downvoteItem();
+        this.setState({ upvoted: false });
+      }
     }
   };
 
   downvoteButton = () => {
     const { downvoted } = this.state;
-    const { upvoteArticle, downvoteArticle } = this.props;
+    const { upvoteItem, downvoteItem, comment_id } = this.props;
 
-    if (!downvoted) {
-      downvoteArticle();
-      this.setState({ downvoted: true });
+    if(comment_id) {
+      if (!downvoted) {
+        downvoteItem(comment_id);
+        this.setState({ downvoted: true });
+      } else {
+        upvoteItem(comment_id);
+        this.setState({ downvoted: false });
+      }
     } else {
-      upvoteArticle();
-      this.setState({ downvoted: false });
+
+      if (!downvoted) {
+        downvoteItem();
+        this.setState({ downvoted: true });
+      } else {
+        upvoteItem();
+        this.setState({ downvoted: false });
+      }
     }
   };
 }

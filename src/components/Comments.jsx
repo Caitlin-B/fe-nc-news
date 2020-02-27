@@ -2,6 +2,7 @@ import React from 'react';
 import { navigate } from '@reach/router';
 import { formatDate } from '../utils/utils';
 import styles from './Comments.module.css';
+import VotingButtons from './VotingButtons';
 
 const Comments = props => {
   const { comments, deleteComment, upvoteComment, downvoteComment } = props;
@@ -37,27 +38,10 @@ const Comments = props => {
                 </button>
               )}
             </p>
-            <p className={styles.voting_block}>
-              {votes} votes{' '}
-              <button
-                className={styles.comment_vote_button}
-                onClick={() => {
-                  upvoteComment(comment_id);
-                }}>
-                <span role='img' aria-label='upvote'>
-                  ⬆️
-                </span>
-              </button>{' '}
-              <button
-                className={styles.comment_vote_button}
-                onClick={() => {
-                  downvoteComment(comment_id);
-                }}>
-                <span role='img' aria-label='downvote'>
-                  ⬇️
-                </span>
-              </button>
-            </p>
+            <section className={styles.voting_block}>
+              {votes}{' '}
+              <VotingButtons upvoteItem={upvoteComment} downvoteItem={downvoteComment} comment_id={comment_id}/>
+            </section>
           </div>
         );
       })}

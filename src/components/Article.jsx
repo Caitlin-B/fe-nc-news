@@ -64,15 +64,15 @@ class Article extends Component {
               </button>
             </p>
             <p>{body}</p>
-            <p className={styles.votes_comments_block}>
+            <section className={styles.votes_comments_block}>
             {votes}
-               <VotingButtons upvoteArticle={this.upvoteArticle} downvoteArticle={this.downvoteArticle}/> {comment_count} {' '}<img className={styles.speechbubble_img}src={speechbubble} alt='comments'></img>{' '}
+               <VotingButtons upvoteItem={this.upvoteArticle} downvoteItem={this.downvoteArticle}/> {comment_count} {' '}<img className={styles.speechbubble_img}src={speechbubble} alt='comments'></img>{' '}
               {author === localStorage.username && <button
                 className={styles.delete_article}
                 onClick={this.deleteArticle}>
                 Delete article
               </button>}
-            </p>
+            </section>
           </div>
         )}
         <br></br>
@@ -170,7 +170,16 @@ class Article extends Component {
   };
 
   downvoteComment = comment_id => {
-    api.patchComment(comment_id, -1);
+    api.patchComment(comment_id, -1).then(() => {
+      this.setState(currentState => {
+        const newComments = currentState.comments.map(comment => {
+          if (comment.comment_id === comment_id) {
+            return { ...comment, votes: comment.votes - 1 };
+          } else return { ...comment };
+        });
+        return { comments: newComments };
+      });
+    });
   };
 }
 
