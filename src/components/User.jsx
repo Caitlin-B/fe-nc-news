@@ -41,17 +41,13 @@ class User extends Component {
       api.getUser(username),
       api.fetchArticles({ author: this.props.username })
     ])
-      .then(([user, articles]) => {
+      .then(([user, {articles}]) => {
         this.setState({ user, articles, isLoading: false });
       })
       .catch(() => {
         this.setState({ err: { msg: 'Not Found!', status: 404 } });
       });
   }
-
-  getUserArticles = () => {
-    return api.fetchArticles({ author: this.props.username });
-  };
 }
 
 export default User;

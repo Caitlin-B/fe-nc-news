@@ -8,7 +8,8 @@ const Comments = props => {
   const { comments, deleteComment, upvoteComment, downvoteComment } = props;
   return (
     <div className={styles.comments_list}>
-      {comments.map(comment => {
+      {comments.length === 0 ? <p>No comments</p> : (
+      comments.map(comment => {
         const { author, created_at, comment_id, body, votes } = comment;
         const formattedDate = formatDate(created_at);
 
@@ -44,7 +45,7 @@ const Comments = props => {
             </section>
           </div>
         );
-      })}
+      }))}
     </div>
   );
 };

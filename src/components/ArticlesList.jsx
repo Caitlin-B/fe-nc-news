@@ -2,7 +2,7 @@ import React from 'react';
 import ArticleTile from './ArticleTile';
 import styles from './ArticlesList.module.css'
 
-const ArticlesList = ({ articles }) => {
+const ArticlesList = ({articles}) => {
   return (
     <ul 
     className={styles.article_list_block}
