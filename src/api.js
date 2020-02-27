@@ -2,11 +2,11 @@ import axios from 'axios';
 
 const baseURL = 'https://cb-news.herokuapp.com/api';
 
-export const fetchArticles = ({ author, topic, sort_by, order } = {}) => {
+export const fetchArticles = ({ author, topic, sort_by, order , p} = {}) => {
   return axios
-    .get(baseURL + '/articles', { params: { author, topic, sort_by, order } })
+    .get(baseURL + '/articles', { params: { author, topic, sort_by, order, p } })
     .then(result => {
-      return result.data.articles;
+      return result.data;
     });
 };
 

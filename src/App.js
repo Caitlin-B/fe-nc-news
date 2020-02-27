@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Router, navigate} from '@reach/router';
-import Home from './components/Home';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Topics from './components/Topics';
@@ -11,6 +10,7 @@ import SignUp from './components/SignUp';
 import * as api from './api';
 import User from './components/User';
 import ErrorPage from './components/ErrorPage';
+import InfiniteScroller from './components/InfiniteScroller'
 
 class App extends Component {
   state = { loggedInUser: null, invalidUser: false };
@@ -21,7 +21,7 @@ class App extends Component {
         <Header logUserOut={this.logUserOut} />
         <Nav />
         <Router>
-          <Home path='/' />
+          <InfiniteScroller path='/' />
           <Topics path='/topics/:topic' />
           <Article
             path='/articles/:article_id'

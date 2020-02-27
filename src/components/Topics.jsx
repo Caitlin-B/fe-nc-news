@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import * as api from '../api';
-import ArticlesList from '../components/ArticlesList';
-import SortArticles from '../components/SortArticles';
 import styles from './Topics.module.css';
 import Toggle from '../components/Toggle';
 import PostArticle from './PostArticle';
+import InfiniteScroller from './InfiniteScroller';
 
 
 class Topics extends Component {
@@ -22,27 +21,13 @@ class Topics extends Component {
           <br></br>
         <PostArticle topic={topic}/>
         </Toggle>
-        <SortArticles filterOptions={this.filterOptions} />
-        <ArticlesList articles={this.state.articlesByTopic} />
+        <InfiniteScroller topic={topic}/>
       </>
     );
   }
 
-  filterOptions = event => {
-    const splitFilter = event.target.value.split('.');
-    const sort_by = splitFilter[0];
-    const order = splitFilter[1];
-    api.fetchArticles({ sort_by, order }).then(articles => {
-      this.setState({ articles });
-    });
-  };
-
   componentDidMount() {
     const { topic } = this.props;
-
-    api.fetchArticles({ topic }).then(articles => {
-      this.setState({ articlesByTopic: articles });
-    });
 
     api
       .fetchTopics()
@@ -60,9 +45,6 @@ class Topics extends Component {
     const { topic } = this.props;
 
     if (topic !== prevProps.topic) {
-      api.fetchArticles({ topic }).then(articles => {
-        this.setState({ articlesByTopic: articles });
-      });
       api
         .fetchTopics()
         .then(topics => {
