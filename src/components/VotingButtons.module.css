@@ -1,0 +1,18 @@
+.voting_button {
+  border: none;
+  font-size: 0.7em;
+  background: none;
+  padding: 0;
+}
+
+.voting_buttons_block {
+  display:flex;
+  align-items: center;
+  margin: 0 0.5em 0 0.5em;
+}
+
+img {
+  height: 18px;
+  padding: 0;
+}
+

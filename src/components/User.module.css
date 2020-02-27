@@ -7,9 +7,9 @@
   border-style: solid;
   border-color: #353535;
 }
-.avatar_pic{
-  margin:3%;
-  width: 30%;
+.avatar_pic {
+  margin: 3%;
+  height: 15em;
 }
 
 @media only screen and (max-width: 600px) {
@@ -17,4 +17,3 @@
     width: 50%;
   }
 }
-

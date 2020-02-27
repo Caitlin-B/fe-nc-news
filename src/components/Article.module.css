@@ -42,19 +42,27 @@
   text-decoration: underline;
 }
 
-.voting_button {
-  border: none;
-  font-size: 0.7em;
-  background: none;
-}
 
 .user_button {
   border: none;
   font-size: 1em;
   padding: 0;
   font-weight: bold;
+  background: none;
 }
 
 .you_name_replacement {
   font-weight: bold;
+}
+
+.votes_comments_block {
+  display: flex;
+  font-weight: bold;
+  align-items: center;
+}
+
+.speechbubble_img {
+  height: 20px;
+  padding: 0;
+  margin-left: 5px;
 }

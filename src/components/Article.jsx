@@ -7,6 +7,8 @@ import AddComment from '../components/AddComment';
 import { formatDate } from '../utils/utils';
 import styles from './Article.module.css';
 import ErrorPage from './ErrorPage';
+import VotingButtons from './VotingButtons';
+import speechbubble from '../images/speechbubble.png';
 
 class Article extends Component {
   state = {
@@ -39,21 +41,7 @@ class Article extends Component {
           <div className={styles.full_article_tile}>
             <h2 className={styles.article_title}>
               {' '}
-              {title}{' '}
-              <button
-                onClick={this.upvoteArticle}
-                className={styles.voting_button}>
-                <span role='img' aria-label='upvote'>
-                  ⬆️
-                </span>
-              </button>{' '}
-              <button
-                onClick={this.downvoteArticle}
-                className={styles.voting_button}>
-                <span role='img' aria-label='downvote'>
-                  ⬇️
-                </span>
-              </button>
+              {title}
             </h2>
             <p className={styles.article_subheading}>
               posted by{' '}
@@ -76,13 +64,14 @@ class Article extends Component {
               </button>
             </p>
             <p>{body}</p>
-            <p>
-              {votes} votes {comment_count} comments{' '}
-              <button
+            <p className={styles.votes_comments_block}>
+            {votes}
+               <VotingButtons upvoteArticle={this.upvoteArticle} downvoteArticle={this.downvoteArticle}/> {comment_count} {' '}<img className={styles.speechbubble_img}src={speechbubble} alt='comments'></img>{' '}
+              {author === localStorage.username && <button
                 className={styles.delete_article}
                 onClick={this.deleteArticle}>
                 Delete article
-              </button>
+              </button>}
             </p>
           </div>
         )}
