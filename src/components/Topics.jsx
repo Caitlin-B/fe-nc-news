@@ -4,10 +4,11 @@ import styles from './Topics.module.css';
 import Toggle from '../components/Toggle';
 import PostArticle from './PostArticle';
 import InfiniteScroller from './InfiniteScroller';
+import ErrorPage from './ErrorPage'
 
 
 class Topics extends Component {
-  state = { articlesByTopic: [], topicDescription: '' };
+  state = { articlesByTopic: [], topicDescription: '', err: false };
 
   render() {
     const {topic} = this.props;
@@ -15,6 +16,7 @@ class Topics extends Component {
     
     return (
       <>
+      {this.state.err ? <ErrorPage err={{ msg: 'Not Found!', status: 404 }} /> : (<>
       <div className={styles.topic_heading}>
         <h2 className={styles.topic_title}>{formattedTopicName}</h2> 
         <h3 className={styles.topic_description}>{this.state.topicDescription}</h3>
@@ -23,7 +25,7 @@ class Topics extends Component {
           <br></br>
         <PostArticle topic={topic}/>
         </Toggle>
-        <InfiniteScroller topic={topic}/>
+        <InfiniteScroller topic={topic}/></>)}
       </>
     );
   }
@@ -40,7 +42,9 @@ class Topics extends Component {
       })
       .then(([topic]) => {
         this.setState({ topicDescription: topic.description });
-      });
+      }).catch(() => {
+        this.setState({err: true})
+      })
   }
 
   componentDidUpdate(prevProps) {

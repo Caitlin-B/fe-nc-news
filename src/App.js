@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Router, navigate } from '@reach/router';
 import Header from './components/Header';
 import Nav from './components/Nav';
