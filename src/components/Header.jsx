@@ -21,12 +21,12 @@ const Header = props => {
         ) : (
           <div>
             <p className={styles.logged_in_text}>
-              logged in as <button
+              logged in as <span><button
                   className={styles.user_button}
                   onClick={() => navigate(`/user/${localStorage.username}`)}>
                   {' '}
                   {localStorage.username}
-                </button>
+                </button></span>
               <button className={styles.logout_button}
                 onClick={props.logUserOut}>
                 Log out

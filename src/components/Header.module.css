@@ -67,9 +67,15 @@
   display: flex;
   flex-direction:column;
   justify-content: center;
+  align-items: center;
   font-size: 1.25em;
   margin:0;
+}
 
+@media only screen and (max-width: 600px) {
+  .logged_in_text {
+    width: 120px;
+  }
 }
 
 .user_button {
