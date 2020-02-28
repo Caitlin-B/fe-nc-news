@@ -12,7 +12,7 @@ class PostArticle extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.postTopic}>
+        <form onSubmit={this.postArticle}>
           <section className={styles.post_article_form}>
             <label>
               <div className={styles.article_input_block}>
@@ -52,7 +52,7 @@ class PostArticle extends Component {
     this.setState({ [input]: e.target.value });
   };
 
-  postTopic = e => {
+  postArticle = e => {
     e.preventDefault();
     const { topic } = this.props;
     const { title, body } = this.state;

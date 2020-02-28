@@ -1,4 +1,4 @@
-.post_article_form {
+.post_topic_form {
   display: flex;
   flex-direction: column;
   margin-top: 1em 0 1em 0;
@@ -10,13 +10,23 @@
   background: #b3c2f2;
 }
 
-.article_input_block {
+
+.topic_input_block {
 display: flex;
 justify-content: space-between;
-
 }
 
-.article_input {
+.topic_name_input {
+  width: 50%;
+  padding: 4px;
+  margin: 0 0 0 0;
+  display: inline-block;
+  border: solid #353535;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size:1em;
+}
+.topic_input {
   width: 90%;
   padding: 4px;
   margin: 0 0 0 0;
@@ -28,7 +38,7 @@ justify-content: space-between;
 }
 
 @media only screen and (max-width: 600px){
-  .article_input {
+  .topic_input {
     width: 80%;
     padding: 4px;
     margin: 0;
@@ -38,15 +48,11 @@ justify-content: space-between;
     box-sizing: border-box;
   }}
 
-.submit_article_button {
+.submit_topic_button {
   border: none;
   background: #353535;
   color: #b3c2f2;
   border-radius: 5px;
   margin-top: 0.5em;
   font-size: 1em;
-}
-
-.err_msg{
-  color: red;
 }

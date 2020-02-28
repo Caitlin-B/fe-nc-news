@@ -22,9 +22,9 @@ export const fetchArticle = article_id => {
     .then(result => result.data.article);
 };
 
-export const fetchComments = article_id => {
+export const fetchComments = (article_id, p) => {
   return axios
-    .get(baseURL + `/articles/${article_id}/comments`)
+    .get(baseURL + `/articles/${article_id}/comments`, {params:{p}})
     .then(result => result.data.comments);
 };
 
@@ -84,4 +84,8 @@ export const postArticle = (newComment) => {
 
 export const removeArticle = article_id => {
   return axios.delete(baseURL + `/articles/${article_id}`)
+}
+
+export const postTopic = (slug, description) => {
+  return axios.post(baseURL + '/topics', {slug, description}).then(res => res.data.topic)
 }

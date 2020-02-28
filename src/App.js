@@ -21,7 +21,7 @@ class App extends Component {
         <Header logUserOut={this.logUserOut} />
         <Nav />
         <Router>
-          <InfiniteScroller path='/' />
+          <InfiniteScroller path='/' addTopic={true}/>
           <Topics path='/topics/:topic' />
           <Article
             path='/articles/:article_id'

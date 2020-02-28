@@ -9,13 +9,17 @@ import styles from './Article.module.css';
 import ErrorPage from './ErrorPage';
 import VotingButtons from './VotingButtons';
 import speechbubble from '../images/speechbubble.png';
+import throttle from 'lodash/throttle';
+
 
 class Article extends Component {
   state = {
     article: {},
     comments: [],
     articleIsLoading: true,
-    commentsIsLoading: true
+    commentsIsLoading: true,
+    page: 1,
+    hasAllItems: false
   };
   render() {
     const {
@@ -102,17 +106,50 @@ class Article extends Component {
   componentDidMount() {
     const { article_id } = this.props;
 
+    this.addScrollEventListener();
+
     api.fetchArticle(article_id).then(article => {
       this.setState({ article, articleIsLoading: false });
     });
     api
       .fetchComments(article_id)
       .then(comments => {
-        this.setState({ comments, commentsIsLoading: false });
+        this.setState((currentState) => {
+          return { comments, commentsIsLoading: false, page: currentState.page + 1 }});
       })
       .catch(() => {
         this.setState({ err: { msg: 'Not Found!', status: 404 } });
       });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  addScrollEventListener = () => {
+    window.addEventListener('scroll', this.handleScroll);
+  };
+
+  handleScroll = throttle(event => {
+    const distanceFromTop = window.scrollY;
+    const heightOfScreen = window.innerHeight;
+    const documentHeight = document.body.scrollHeight;
+
+    if (distanceFromTop + heightOfScreen === documentHeight) {
+      this.getComments(this.props.topic);
+    }
+  }, 2000);
+
+  getComments = () => {
+    return api.fetchComments(this.props.article_id, this.state.page).then(comments => {
+      this.setState(currentState => {
+        return {
+          comments: currentState.comments.concat(comments),
+          isLoading: false,
+          page: currentState.page + 1
+        }
+      })
+    })
   }
 
   //add functionality so you can only vote once??

@@ -11,9 +11,11 @@ class Nav extends Component {
 
     return <div className={styles.nav_bar}>
     {topics.map(topic => {
+      const formattedTopicName= topic.slug.charAt(0).toUpperCase()+topic.slug.slice(1,topic.slug.length);
+
       return (
         <Link to={`/topics/${topic.slug}`} key={topic.slug} className={styles.topic_link} style={{textDecoration:'none'}}>
-          <div>{topic.slug}</div>
+          <div>{formattedTopicName}</div>
         </Link>
       );
     })}

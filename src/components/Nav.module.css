@@ -1,5 +1,6 @@
 .nav_bar {
   display: flex;
+  flex-wrap: wrap;
   background: #353535;
   color: #b3c2f2 !important; 
   text-decoration: none !important;

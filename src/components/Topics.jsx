@@ -11,10 +11,12 @@ class Topics extends Component {
 
   render() {
     const {topic} = this.props;
+    const formattedTopicName= topic.charAt(0).toUpperCase()+topic.slice(1,topic.length);
+    
     return (
       <>
       <div className={styles.topic_heading}>
-        <h2 className={styles.topic_title}>{topic}</h2> 
+        <h2 className={styles.topic_title}>{formattedTopicName}</h2> 
         <h3 className={styles.topic_description}>{this.state.topicDescription}</h3>
         </div>
         <Toggle buttonMessage={`Post an article about ${topic}`}>
