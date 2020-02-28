@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Router, navigate} from '@reach/router';
+import { Router, navigate } from '@reach/router';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Topics from './components/Topics';
@@ -10,18 +10,18 @@ import SignUp from './components/SignUp';
 import * as api from './api';
 import User from './components/User';
 import ErrorPage from './components/ErrorPage';
-import InfiniteScroller from './components/InfiniteScroller'
+import InfiniteScroller from './components/InfiniteScroller';
 
 class App extends Component {
-  state = { loggedInUser: null, invalidUser: false };
+  state = { loggedInUser: null, invalidUser: false, topics: [] };
 
   render() {
     return (
       <div className='App'>
         <Header logUserOut={this.logUserOut} />
-        <Nav />
+        <Nav topics={this.state.topics} />
         <Router>
-          <InfiniteScroller path='/' addTopic={true}/>
+          <InfiniteScroller path='/' addTopic={this.addTopic} />
           <Topics path='/topics/:topic' />
           <Article
             path='/articles/:article_id'
@@ -40,6 +40,12 @@ class App extends Component {
     );
   }
 
+  componentDidMount() {
+    api.fetchTopics().then(topics => {
+      this.setState({ topics });
+    });
+  }
+
   logUserIn = (e, username, password) => {
     e.preventDefault();
     api
@@ -56,6 +62,17 @@ class App extends Component {
   logUserOut = () => {
     localStorage.clear();
     this.setState({ loggedInUser: null });
+  };
+
+  addTopic = (e, slug, description) => {
+    e.preventDefault();
+
+    api.postTopic(slug, description).then(topic => {
+      this.setState(currentState => {
+        return { topics: currentState.topics.concat(topic) };
+      });
+      navigate(`/topics/${topic.slug}`);
+    });
   };
 }
 

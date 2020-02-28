@@ -21,9 +21,9 @@ class InfiniteScroller extends Component {
     return (
       <section>
         <SortArticles filterOptions={this.filterOptions} />
-        {this.props.addTopic === true && (
+        {this.props.addTopic && (
           <Toggle buttonMessage='Add a new topic'>
-            <AddTopic />
+            <AddTopic addTopic={this.props.addTopic}/>
           </Toggle>
         )}
         {isLoading ? <p>loading...</p> : <ArticlesList articles={data} />}

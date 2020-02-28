@@ -4,11 +4,9 @@ import { Link } from '@reach/router';
 import styles from './Nav.module.css'
 
 class Nav extends Component {
-  state = { topics: [] };
 
   render() {
-    const { topics } = this.state;
-
+    const { topics } = this.props;
     return <div className={styles.nav_bar}>
     {topics.map(topic => {
       const formattedTopicName= topic.slug.charAt(0).toUpperCase()+topic.slug.slice(1,topic.slug.length);
@@ -22,11 +20,11 @@ class Nav extends Component {
     </div>
   }
 
-  componentDidMount() {
-    api.fetchTopics().then(topics => {
-      this.setState({ topics });
-    });
-  }
+  // componentDidMount() {
+  //   api.fetchTopics().then(topics => {
+  //     this.setState({ topics });
+  //   });
+  // }
 }
 
 export default Nav;

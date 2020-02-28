@@ -7,9 +7,10 @@ class AddTopic extends Component {
   state = { slug: '', description: '' };
 
   render() {
+    const {slug, description} = this.state
     return (
       <div>
-        <form onSubmit={this.postTopic}>
+        <form onSubmit={(e) => {this.props.addTopic(e, slug, description)}}>
           <section className={styles.post_topic_form}>
             <label>
               <div className={styles.topic_input_block}>
@@ -49,15 +50,7 @@ class AddTopic extends Component {
     this.setState({ [input]: e.target.value });
   };
 
-  postTopic = e => {
-    e.preventDefault();
-    const { slug, description } = this.state;
-
-    api.postTopic(slug, description).then(topic => {
-      this.setState({ slug: '', description: '' });
-      // navigate(`/topics/${topic.slug}`)
-    });
-  };
+  
 }
 
 export default AddTopic;
