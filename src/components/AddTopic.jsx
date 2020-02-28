@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import styles from './AddTopic.module.css';
-import * as api from '../api';
-import { navigate } from '@reach/router';
 
 class AddTopic extends Component {
   state = { slug: '', description: '' };
 
   render() {
-    const {slug, description} = this.state
+    const { slug, description } = this.state;
     return (
       <div>
-        <form onSubmit={(e) => {this.props.addTopic(e, slug, description)}}>
+        <form
+          onSubmit={e => {
+            this.props.addTopic(e, slug, description);
+          }}>
           <section className={styles.post_topic_form}>
             <label>
               <div className={styles.topic_input_block}>
@@ -49,8 +50,6 @@ class AddTopic extends Component {
   handleChange = (e, input) => {
     this.setState({ [input]: e.target.value });
   };
-
-  
 }
 
 export default AddTopic;
