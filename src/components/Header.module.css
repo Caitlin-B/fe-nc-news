@@ -7,6 +7,12 @@
   color: #353535;
 }
 
+@media only screen and (max-width: 600px) {
+  .App_header {
+    padding: 0.5em;
+  }
+}
+
 .NC_logo {
   display: flex;
   align-items: center;
@@ -58,6 +64,9 @@
 }
 
 .logged_in_text {
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
   font-size: 1.25em;
   margin:0;
 
