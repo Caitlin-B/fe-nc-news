@@ -129,7 +129,6 @@ class Article extends Component {
         });
       })
       .catch(err => {
-        console.dir(err.response.data.msg);
         this.setState({
           err: { msg: err.response.data.msg, status: err.response.status }
         });
