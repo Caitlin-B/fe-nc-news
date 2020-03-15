@@ -4,6 +4,10 @@ NC news is a web application which acts as a resource of news articles.
 
 Users can sign up and log in using a protected password, where they can post, view and vote on articles and comments. Users can also start discussions by adding new topics, find articles about these topics, and also view articles posted by another user.
 
+Create an account to post, or use this example login: 
+username : jessjelly
+password : password
+
 Hosted: https://cb-nc-news.netlify.com/
 
 Back-end Github: https://github.com/Caitlin-B/nc-news

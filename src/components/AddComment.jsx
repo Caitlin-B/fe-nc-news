@@ -6,7 +6,7 @@ class AddComment extends Component {
   state = { commentBody: '', err: false };
   render() {
     return (
-      <form onSubmit={this.postComment}>
+      (localStorage.username ? (<form onSubmit={this.postComment}>
         <input
           type='text'
           className={styles.comment_input}
@@ -16,10 +16,13 @@ class AddComment extends Component {
         <button className={styles.submit_comment_button}>Submit</button>{' '}
         {this.state.err && (
           <p className={styles.err_msg}>
-            you must be logged in to post a comment!
+            Comments must be less than 2,000 characters
           </p>
         )}
-      </form>
+      </form>) : <p className={styles.err_msg}>
+            You must be logged in to post a comment!
+          </p>)
+      
     );
   }
 

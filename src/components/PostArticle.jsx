@@ -11,7 +11,7 @@ class PostArticle extends Component {
   };
   render() {
     return (
-      <div>
+      (localStorage.username ? (<div>
         <form onSubmit={this.postArticle}>
           <section className={styles.post_article_form}>
             <label>
@@ -42,9 +42,10 @@ class PostArticle extends Component {
               </div>
             </label>
           </section>
-          <button className={styles.submit_article_button}>Submit</button> {this.state.err && <span className={styles.err_msg}>you must be logged in to post an article!</span>}
+          <button className={styles.submit_article_button}>Submit</button> {this.state.err && <span className={styles.err_msg}>Articles must be less than 2,000 characters</span>}
         </form>
-      </div>
+      </div>) : <span className={styles.err_msg}>You must be logged in to post an article!</span>)
+      
     );
   }
 
