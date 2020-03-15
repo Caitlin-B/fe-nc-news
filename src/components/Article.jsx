@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
-import { navigate } from '@reach/router';
-import * as api from '../api';
-import Comments from '../components/Comments';
-import Toggle from '../components/Toggle';
-import AddComment from '../components/AddComment';
-import { formatDate } from '../utils/utils';
-import styles from './Article.module.css';
-import ErrorPage from './ErrorPage';
-import VotingButtons from './VotingButtons';
-import speechbubble from '../images/speechbubble.png';
-import throttle from 'lodash/throttle';
-
+import React, { Component } from "react";
+import { navigate } from "@reach/router";
+import * as api from "../api";
+import Comments from "../components/Comments";
+import Toggle from "../components/Toggle";
+import AddComment from "../components/AddComment";
+import { formatDate } from "../utils/utils";
+import styles from "./Article.module.css";
+import ErrorPage from "./ErrorPage";
+import VotingButtons from "./VotingButtons";
+import speechbubble from "../images/speechbubble.png";
+import throttle from "lodash/throttle";
 
 class Article extends Component {
   state = {
@@ -36,46 +35,53 @@ class Article extends Component {
       formattedDate = formatDate(created_at);
     }
     return this.state.err ? (
-      <ErrorPage path='/*' err={{ msg: 'Not Found!', status: 404 }} />
+      <ErrorPage path="/*" err={{ msg: this.state.err.msg, status: this.state.err.status }} />
     ) : (
       <div>
         {this.state.articleIsLoading ? (
           <p>loading article...</p>
         ) : (
           <div className={styles.full_article_tile}>
-            <h2 className={styles.article_title}>
-              {' '}
-              {title}
-            </h2>
+            <h2 className={styles.article_title}> {title}</h2>
             <p className={styles.article_subheading}>
-              posted by{' '}
+              posted by{" "}
               {author === localStorage.username ? (
                 <span className={styles.you_name_replacement}> you </span>
               ) : (
                 <button
                   className={styles.user_button}
                   onClick={() => navigate(`/user/${author}`)}>
-                  {' '}
+                  {" "}
                   {author}
                 </button>
-              )}{' '}
-              on {formattedDate} in{' '}
+              )}{" "}
+              on {formattedDate} in{" "}
               <button
                 className={styles.article_topic}
                 onClick={() => navigate(`/topics/${topic}`)}>
-                {' '}
+                {" "}
                 {topic}
               </button>
             </p>
             <p>{body}</p>
             <section className={styles.votes_comments_block}>
-            {votes}
-               <VotingButtons upvoteItem={this.upvoteArticle} downvoteItem={this.downvoteArticle}/> {comment_count} {' '}<img className={styles.speechbubble_img}src={speechbubble} alt='comments'></img>{' '}
-              {author === localStorage.username && <button
-                className={styles.delete_article}
-                onClick={this.deleteArticle}>
-                Delete article
-              </button>}
+              {votes}
+              <VotingButtons
+                upvoteItem={this.upvoteArticle}
+                downvoteItem={this.downvoteArticle}
+              />{" "}
+              {comment_count}{" "}
+              <img
+                className={styles.speechbubble_img}
+                src={speechbubble}
+                alt="comments"></img>{" "}
+              {author === localStorage.username && (
+                <button
+                  className={styles.delete_article}
+                  onClick={this.deleteArticle}>
+                  Delete article
+                </button>
+              )}
             </section>
           </div>
         )}
@@ -84,7 +90,7 @@ class Article extends Component {
           <p>loading comments...</p>
         ) : (
           <>
-            <Toggle buttonMessage='Add a comment'>
+            <Toggle buttonMessage="Add a comment">
               <AddComment
                 articleId={this.props.article_id}
                 loggedInUser={this.props.loggedInUser}
@@ -114,20 +120,28 @@ class Article extends Component {
     api
       .fetchComments(article_id)
       .then(comments => {
-        this.setState((currentState) => {
-          return { comments, commentsIsLoading: false, page: currentState.page + 1 }});
+        this.setState(currentState => {
+          return {
+            comments,
+            commentsIsLoading: false,
+            page: currentState.page + 1
+          };
+        });
       })
-      .catch(() => {
-        this.setState({ err: { msg: 'Not Found!', status: 404 } });
+      .catch(err => {
+        console.dir(err.response.data.msg);
+        this.setState({
+          err: { msg: err.response.data.msg, status: err.response.status }
+        });
       });
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener("scroll", this.handleScroll);
   }
 
   addScrollEventListener = () => {
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener("scroll", this.handleScroll);
   };
 
   handleScroll = throttle(event => {
@@ -141,16 +155,18 @@ class Article extends Component {
   }, 2000);
 
   getComments = () => {
-    return api.fetchComments(this.props.article_id, this.state.page).then(comments => {
-      this.setState(currentState => {
-        return {
-          comments: currentState.comments.concat(comments),
-          isLoading: false,
-          page: currentState.page + 1
-        }
-      })
-    })
-  }
+    return api
+      .fetchComments(this.props.article_id, this.state.page)
+      .then(comments => {
+        this.setState(currentState => {
+          return {
+            comments: currentState.comments.concat(comments),
+            isLoading: false,
+            page: currentState.page + 1
+          };
+        });
+      });
+  };
 
   //add functionality so you can only vote once??
 
@@ -172,7 +188,7 @@ class Article extends Component {
 
   deleteArticle = () => {
     api.removeArticle(this.props.article_id).then(() => {
-      navigate('/');
+      navigate("/");
     });
   };
 
